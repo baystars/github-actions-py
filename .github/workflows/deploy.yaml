@@ -1,18 +1,22 @@
-name: Deploy package
+name: SCP Deploy
 
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - name: ssh key generate
-        run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-      - name: deploy
-        run: bash deploy.sh
+    - uses: actions/checkout@v2
+    - name: SCP Deploy
+      uses: lBeJIuk/scp_action@v1
+      with:
+        public_key: ${{ secrets.SSH_KEY_PUBLIC }}
+        #ssh_port: ${{ secrets.PORT }}
+        ssh_username: toyoake
+        ssh_host: toyoake@toyoake.sakura.ne.jp
+        source: 'README.md'
+        target: '/home/toyoake'
