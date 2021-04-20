@@ -1,4 +1,4 @@
-name: MasterCI
+name: Deploy
 
 on:
   push:
@@ -27,14 +27,11 @@ jobs:
       - name: Deploy
         uses: nogsantos/scp-deploy@master
         with:
-          #src: ./dist/*
-          src: ./hoge/*
-          #host: ${{ secrets.SSH_HOST }}
-          host: ${{ secrets.REMOTE_HOST }}
+          host: ${{ secrets.SSH_HOST }}
           #remote: ${{ secrets.SSH_DIR }}
-          remote: data
-          #port: ${{ secrets.SSH_PORT }}
-          port: 22
-          user: ${{ secrets.REMOTE_USER }}
-          #key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          user: ${{ secrets.SSH_USER }}
+          #src: ${{ secrets.SRCL_DIR }}
+          src: ./hoge
+          remote: www
