@@ -1,6 +1,6 @@
 # github-actions-test
 
-Test with Python in Githab Actions
+Test in Githab Actions
 
 ## Branch
 
@@ -40,3 +40,5 @@ cat id_rsa_<name>.pub >> ~/.ssh/authorized_keys2
 #### リンク
 
 * [SCP deploy action · Actions · GitHub Marketplace](https://github.com/marketplace/actions/scp-deploy-action)
+
+### upload-artifact

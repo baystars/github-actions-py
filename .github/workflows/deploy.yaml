@@ -10,28 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy
 
-    steps:
-      - uses: actions/checkout@v2
+  steps:
+  - uses: actions/checkout@v2
 
-      #- name: Bucket actions
-      #  uses: actions/setup-node@v1
-      #  with:
-      #    node-version: 8
-      #- run: npm i
-      #- run: npm run test
-      #- run: npm run generate
+  - run: mkdir -p path/to/artifact
 
-      - name: Build
-        run: mkdir hoge && echo "hage" > hoge/hage
+  - run: echo hello > path/to/artifact/world.txt
 
-      - name: Deploy
-        uses: nogsantos/scp-deploy@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          #remote: ${{ secrets.SSH_DIR }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          user: ${{ secrets.SSH_USER }}
-          #src: ${{ secrets.SRCL_DIR }}
-          src: ./hoge
-          remote: www
+  - uses: actions/upload-artifact@v2
+    with:
+      name: my-artifact
+      path: path/to/artifact/world.txt
