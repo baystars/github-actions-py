@@ -1,22 +1,40 @@
-on: push
-name: 🚀 Deploy website on push
+name: MasterCI
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build:
     runs-on: ubuntu-latest
+    name: Build and Deploy
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2.3.2
+      - uses: actions/checkout@master
 
-    - name: Build
-      run: mkdir hoge && echo "hage" > hoge/hoge.txt
+      #- name: Bucket actions
+      #  uses: actions/setup-node@v1
+      #  with:
+      #    node-version: 8
+      #- run: npm i
+      #- run: npm run test
+      #- run: npm run generate
 
-    - name: Deploy to Staging server
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SOURCE: "hoge/"
-        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-        REMOTE_USER: toyoake
-        #REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        #TARGET: ${{ secrets.REMOTE_TARGET }}
+      - name: Build
+        run: mkdir hoge && echo "hage" > hoge/hage
+
+      - name: Deploy
+        uses: nogsantos/scp-deploy@master
+        with:
+          #src: ./dist/*
+          src: ./hoge/*
+          #host: ${{ secrets.SSH_HOST }}
+          host: ${{ secrets.REMOTE_HOST }}
+          #remote: ${{ secrets.SSH_DIR }}
+          remote: data
+          #port: ${{ secrets.SSH_PORT }}
+          port: 22
+          user: ${{ secrets.REMOTE_USER }}
+          #key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
