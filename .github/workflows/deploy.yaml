@@ -11,11 +11,11 @@ jobs:
     - name: Build
       run: mkdir hoge && echo "hage" > hoge/hoge.txt
 
-    - name: Deploy
-      uses: sebastianpopp/ftp-action@releases/v2
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        user: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        localDir: "hoge"
-        remoteDir: "data"
+    - name: Deploy to Staging server
+      uses: easingthemes/ssh-deploy@v2.1.5
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SOURCE: "hoge/"
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+        #TARGET: ${{ secrets.REMOTE_TARGET }}
