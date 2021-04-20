@@ -7,16 +7,16 @@ on:
 
 jobs:
   deploy:
-    name: sample
+    name: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: install SSH key
         uses: shimataro/ssh-key-action@v2 # こちらのアクションがキモ
         with:
-          key: ${{ secrets.SSH_KEY }} # 必須
-          public-key: ${{ secrets.SSH_KEY_PUBLIC }} # 必須
-          name: id_rsa # optional
-          #known_hosts: ${{ secrets.KNOWN_HOSTS }} # 省略可だが、セキュリティ上設定したほうがよい
+          key: ${{ secrets.SSH_KEY }}
+          public-key: ${{ secrets.SSH_KEY_PUBLIC }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
       - name: deploy
         run: bash deploy.sh
