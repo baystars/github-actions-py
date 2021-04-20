@@ -8,11 +8,11 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2.3.2
 
-      - name: Deploy
-        uses: sebastianpopp/ftp-action@releases/v2
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          localDir: "data"
-          remoteDir: "www"
+    - name: Deploy
+      uses: sebastianpopp/ftp-action@releases/v2
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        user: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        localDir: "data"
+        remoteDir: "www"
