@@ -42,3 +42,25 @@ cat id_rsa_<name>.pub >> ~/.ssh/authorized_keys2
 * [SCP deploy action · Actions · GitHub Marketplace](https://github.com/marketplace/actions/scp-deploy-action)
 
 ### upload-artifact
+
+設定は下記リンク参照
+
+![作成されたArtifacts](screenshot.png)
+
+#### WEB-APIを利用したArtifactsの取得
+
+* アクセストークンの発行(右上のユーザアイコンから)
+  * `Settings>Developer settings>Personal access tokens>Generate new token`
+    * 一番上の`repo`にチェック
+
+#### 確認
+
+```shell
+make download
+```
+
+`test.http`の`download_url`はうまく取得できてない
+
+#### リンク
+
+* [actions/upload\-artifact](https://github.com/actions/upload-artifact)

@@ -1,0 +1,10 @@
+@endpoint = https://api.github.com/repos/{{$dotenv GITHUB_ACCOUNT}}/{{$dotenv GITHUB_REPO}}/actions/artifacts?per_page=1
+### @name artifact
+{{endpoint}}
+
+###
+@download_url = {{artifact.response.body.$.artifacts[0].archive_download_url}}
+
+###
+GET {{download_url}}
+Authorization: token {{$dotenv GITHUB_TOKEN}}
