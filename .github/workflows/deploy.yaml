@@ -17,6 +17,6 @@ jobs:
         public_key: ${{ secrets.SSH_KEY_PUBLIC }}
         #ssh_port: ${{ secrets.PORT }}
         ssh_username: toyoake
-        ssh_host: toyoake@toyoake.sakura.ne.jp
+        ssh_host: toyoake.sakura.ne.jp
         source: 'README.md'
         target: '/home/toyoake'
