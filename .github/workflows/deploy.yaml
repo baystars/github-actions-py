@@ -7,16 +7,12 @@ on:
 
 jobs:
   deploy:
-    name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: install SSH key
-        uses: shimataro/ssh-key-action@v2 # こちらのアクションがキモ
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          public-key: ${{ secrets.SSH_KEY_PUBLIC }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      - uses: actions/checkout@v1
+      - name: ssh key generate
+        run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
       - name: deploy
         run: bash deploy.sh
